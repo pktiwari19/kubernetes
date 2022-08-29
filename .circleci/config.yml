@@ -10,6 +10,7 @@ jobs:
                 name: create capstone network
                 command: |
                     aws cloudformation create-stack --stack-name capnetwork --template-body file://kube_network.yml --region=us-east-1
+                    sleep 300
         
     deploy-cluster:
         docker:
@@ -31,7 +32,7 @@ jobs:
             - run:
                 name: deploy eks cluster via eksctl
                 command: |
-                    eksctl create cluster -f cluster.yaml --kubeconfig=~/.kube/config
+                    eksctl create cluster -f cluster.yml --kubeconfig=~/.kube/config
                     kubectl get svc
 
 workflows:
