@@ -1,0 +1,39 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: capstone_proj
+  region: us-east-1
+
+vpc:
+  VpcId: 
+        Fn::ImportValue:
+          capstone-VPCID
+  cidr: "10.0.0.0/16"
+  subnets:
+    public:
+      us-east-1a:
+        id: 
+            Fn::ImportValue:
+                capstone-PUB1-SN
+      us-east-1b:
+        id: 
+            Fn::ImportValue:
+                capstone-PUB2-SN
+    private:
+      us-east-1a:
+        id: 
+            Fn::ImportValue:
+                capstone-PRI1-SN
+      us-east-1b:
+        id: 
+            Fn::ImportValue:
+                capstone-PRI2-SN
+
+nodeGroups:
+  - name: capstone-public-workers
+    instanceType: t2.medium
+    desiredCapacity: 1
+  - name: capstone-private-workers
+    instanceType: t2.medium
+    desiredCapacity: 1
+    privateNetworking: true
