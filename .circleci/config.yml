@@ -32,8 +32,9 @@ jobs:
             - run:
                 name: deploy eks cluster via eksctl
                 command: |
-                    export psub1="aws cloudformation describe-stacks --stack-name capnetwork --query "Stacks[0].Outputs[?OutputKey=='PublicSubnet1'].OutputValue" --output text"
-                    export psub2="aws cloudformation describe-stacks --stack-name capnetwork --query "Stacks[0].Outputs[?OutputKey=='PublicSubnet2'].OutputValue" --output text"
+                    aws --version
+                    export psub1=`aws cloudformation describe-stacks --stack-name capnetwork --query "Stacks[0].Outputs[?OutputKey=='PublicSubnet1'].OutputValue" --output text`
+                    export psub2=`aws cloudformation describe-stacks --stack-name capnetwork --query "Stacks[0].Outputs[?OutputKey=='PublicSubnet2'].OutputValue" --output text`
                     eksctl create cluster --name capstoneProj --region us-east-1 --vpc-cidr 10.0.0.0/16 --vpc-public-subnets ${psub1},${psub2} --nodegroup-name public-workers --node-type t2.medium --kubeconfig=~/.kube/config
                     kubectl get svc
 
