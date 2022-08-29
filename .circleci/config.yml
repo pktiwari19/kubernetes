@@ -1,6 +1,6 @@
 version: 2
 jobs:
-    build_network:
+    build-network:
         docker:
             - image: cimg/aws:2022.06
         working_directory: ~/repo 
@@ -11,7 +11,7 @@ jobs:
                 command: |
                     aws cloudformation create-stack --stack-name capstone_network --template-body file://kube_network.yml --region=us-east-1
         
-    deploy_cluster:
+    deploy-cluster:
         docker:
             - image: cimg/aws:2022.06
         working_directory: ~/repo
@@ -37,6 +37,6 @@ jobs:
 workflow:
     capstone_infra:
         jobs:
-            - build_network
-            - deploy_cluster:
-                requires: build_network
+            - build-network
+            - deploy-cluster:
+                requires: build-network
