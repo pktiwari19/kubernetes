@@ -9,7 +9,7 @@ jobs:
             - run:
                 name: create capstone network
                 command: |
-                    aws cloudformation create-stack --stack-name capstone_network --template-body file://kube_network.yml --region=us-east-1
+                    aws cloudformation create-stack --stack-name capnetwork --template-body file://kube_network.yml --region=us-east-1
         
     deploy-cluster:
         docker:
