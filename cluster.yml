@@ -5,24 +5,19 @@ metadata:
   region: us-east-1
 
 vpc:
-  VpcId: 
-    Fn::ImportValue: "capstone-VPCID"
+  VpcId: "Fn::ImportValue: capstone-VPCID"
   cidr: "10.0.0.0/16"
   subnets:
     public:
       us-east-1a:
-        id: 
-          Fn::ImportValue: "capstone-PUB1-SN"
+        id: "Fn::ImportValue: capstone-PUB1-SN"
       us-east-1b:
-        id: 
-          Fn::ImportValue: "capstone-PUB2-SN"
+        id: "Fn::ImportValue: capstone-PUB2-SN"
     private:
       us-east-1a:
-        id: 
-          Fn::ImportValue: "capstone-PRI1-SN"
+        id: "Fn::ImportValue: capstone-PRI1-SN"
       us-east-1b:
-        id: 
-          Fn::ImportValue: "capstone-PRI2-SN"
+        id: "Fn::ImportValue: capstone-PRI2-SN"
 
 nodeGroups:
   - name: capstone-public-workers
