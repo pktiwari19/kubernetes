@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
     build-network:
         docker:
@@ -35,7 +35,7 @@ jobs:
                     kubectl get svc
 
 workflow:
-    capstone_infra:
+    default:
         jobs:
             - build-network
             - deploy-cluster:
