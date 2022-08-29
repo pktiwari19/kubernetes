@@ -39,4 +39,4 @@ workflows:
         jobs:
             - build-network
             - deploy-cluster:
-                requires: build-network
+                requires: [build-network]
