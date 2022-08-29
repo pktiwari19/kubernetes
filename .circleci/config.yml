@@ -34,8 +34,8 @@ jobs:
                     eksctl create cluster -f cluster.yaml --kubeconfig=~/.kube/config
                     kubectl get svc
 
-workflow:
-    default:
+workflows:
+    capstone_infra:
         jobs:
             - build-network
             - deploy-cluster:
