@@ -27,7 +27,7 @@ jobs:
                     eksctl version
                     #installing kubectl
                     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-                    sudo install -m 0755 kubectl /usr/local/bin/kubectl
+                    sudo install -m 0755 kubectl /usr/bin/kubectl
                     kubectl version --client 
             - run:
                 name: deploy eks cluster via eksctl
@@ -36,7 +36,9 @@ jobs:
                     export psub1=`aws cloudformation describe-stacks --stack-name capnetwork --query "Stacks[0].Outputs[?OutputKey=='PublicSubnet1'].OutputValue" --output text`
                     export psub2=`aws cloudformation describe-stacks --stack-name capnetwork --query "Stacks[0].Outputs[?OutputKey=='PublicSubnet2'].OutputValue" --output text`
                     eksctl create cluster --name capstoneProj --region us-east-1 --vpc-public-subnets ${psub1},${psub2} --nodegroup-name public-workers --node-type t2.medium --kubeconfig=~/.kube/config
-                    kubectl get svc
+                    kubectl --kubeconfig=~/.kube/config get svc
+                    kubectl --kubeconfig=~/.kube/config get nodes
+                    cat ~/.kube/config
 
 workflows:
     default:
